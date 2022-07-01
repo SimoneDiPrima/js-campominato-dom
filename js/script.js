@@ -8,6 +8,16 @@ const rowCells = rows * cells ;
 
 let userResult = 0;
 
+function randomNumber(){
+    let numRan;
+    for(let j=1;j<=16;j++){
+        numRan = Math.floor(Math.random()*100) 
+      console.log(numRan);
+    }
+    return numRan;
+}
+const bombNumber = randomNumber();
+ console.log(bombNumber);
 
     buttonPlay.addEventListener(`click`, function(){
         grid.innerHTML = ``;
@@ -16,7 +26,7 @@ let userResult = 0;
         const cell = document.createElement(`div`);
         cell.className = `cell`;
         cell.addEventListener(`click`,function(){
-            this.classList.toggle(`clicked`);
+          this.classList.add(`clicked`);
             console.log(i);
             if(cell.classList.contains(`clicked`)){
                 userResult += 1;
