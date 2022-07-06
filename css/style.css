@@ -21,7 +21,16 @@
 .main{
     background-color: rgb(207, 252, 237);
 }
-#grid .cell.clicked{
+
+#grid .cell .clicked{
+    cursor:not-allowed;
+    color:#fff;
+}
+
+#grid .cell.safe{
     background-color: dodgerblue;
 }
 
+#grid .cell.danger{
+    background-color: red;
+}
