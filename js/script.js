@@ -31,6 +31,9 @@ function randomNumber(min,max,blacklist){
 }
 const bombNumber = randomNumber(1,100,randomNum);
 
+let isgameOver = false;
+
+
     buttonPlay.addEventListener(`click`, function(){
         console.log(bombNumber)
         console.log(randomNum);
@@ -50,11 +53,16 @@ const bombNumber = randomNumber(1,100,randomNum);
 
 
             cell.addEventListener(`click`,function(){
+                if(isgameOver)return;
+                 isgameOver = gameOver(this,bombNumber);
+                console.log(gameOver);
+                
+                
                 if(this.classList.contains(`clicked`)) return;
                 this.classList.add(`clicked`);
             console.log(this.innerText);
-            const isgameOver = gameOver(this,bombNumber);
-            if(!isgameOver)userResult++;
+          if(!isgameOver) userResult++;
+            
             console.log(userResult);
             numberCounter.innerHTML = `il punteggio del giocatore e: ${userResult}`;
             }
@@ -69,18 +77,17 @@ grid.appendChild(cell)
 
 
 function gameOver(cell,bombNumber){
-    let newGame;
-    newGame = stopPoints.fixed
+    
     const bomb = (parseInt(cell.innerText))
    
     if(randomNum.includes(bomb)){
         cell.classList.add(`danger`);
        finalResult.innerHTML = messageGameover(userResult,false);
-       setTimeout(()=>{
-        grid.innerHTML =``;
-        finalResult.innerHTML = ``;
-        numberCounter.innerHTML = ``
-       },1000)
+    // setTimeout(()=>{
+    //     grid.innerHTML =``;
+    //     finalResult.innerHTML = ``;
+    //     numberCounter.innerHTML = ``;
+    //    },1000)
       
 
         console.log(`peccato hai perso per colpa di una bomba!`)
@@ -88,6 +95,7 @@ function gameOver(cell,bombNumber){
     }
     else{
         cell.classList.add(`safe`);
+       
         if(userResult+1 === winPoints)
         {  
             finalResult.innerHTML = messageGameover(winPoints,true);
@@ -100,14 +108,17 @@ function gameOver(cell,bombNumber){
     }
 
 }
+
 function messageGameover(userResult,hasWon){
     
     let message = ``;
     if(hasWon){
         message = `complimenti hai vinto il tuo punteggio e ${userResult}`
+        isgameOver = true;
     }
     else{
         message = `<strong>hai perso il tuo punteggio e: ${userResult}</strong>`
+        isgameOver = true;
     }
     return message;
     
