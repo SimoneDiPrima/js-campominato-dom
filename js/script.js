@@ -8,12 +8,12 @@ const rows = 10;
 const cells = 10;
 const rowCells = rows * cells ;
 const winPoints = 84;
+const stopPoints = document.createElement(`div`)
 
 let userResult = 0;
 
 
 let randomNum =[ ];
-
 
 function randomNumber(min,max,blacklist){
     let numRan;
@@ -69,17 +69,18 @@ grid.appendChild(cell)
 
 
 function gameOver(cell,bombNumber){
-
+    let newGame;
+    newGame = stopPoints.fixed
     const bomb = (parseInt(cell.innerText))
-
+   
     if(randomNum.includes(bomb)){
         cell.classList.add(`danger`);
        finalResult.innerHTML = messageGameover(userResult,false);
        setTimeout(()=>{
         grid.innerHTML =``;
         finalResult.innerHTML = ``;
-        numberCounter.innerHTML = ``;
-       },5000)
+        numberCounter.innerHTML = ``
+       },1000)
       
 
         console.log(`peccato hai perso per colpa di una bomba!`)
@@ -95,12 +96,12 @@ function gameOver(cell,bombNumber){
         }
 
         return false;
+        
     }
 
-
 }
-
 function messageGameover(userResult,hasWon){
+    
     let message = ``;
     if(hasWon){
         message = `complimenti hai vinto il tuo punteggio e ${userResult}`
@@ -109,4 +110,5 @@ function messageGameover(userResult,hasWon){
         message = `<strong>hai perso il tuo punteggio e: ${userResult}</strong>`
     }
     return message;
+    
 }
